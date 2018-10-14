@@ -1,6 +1,6 @@
-const ROWS = 50;
-const COLS = 100;
-const SCALE = 10;
+const ROWS = 50; // Number of grid rows
+const COLS = 100; // Number of grid columns
+const SCALE = 10; // Grid scale (higher the bigger)
 
 let currentGrid;
 let nextGrid;
@@ -29,7 +29,7 @@ function countNeighbors(array, x, y) {
   return neighbors;
 }
 
-function computeNextGrid() {
+function computeNextGeneration() {
   livingCells = 0;
 
   // Determine next state for each cells
@@ -38,12 +38,14 @@ function computeNextGrid() {
       const cell = currentGrid[row][col];
       const neighbors = countNeighbors(currentGrid, col, row);
 
+      // Apply Conway's Game of Life rules
+      // https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life#Rules
       if (!cell && neighbors === 3) {
-        nextGrid[row][col] = 1;
+        nextGrid[row][col] = 1; // cell is born
       } else if (cell && (neighbors < 2 || neighbors > 3)) {
-        nextGrid[row][col] = 0;
+        nextGrid[row][col] = 0; // cell dies
       } else {
-        nextGrid[row][col] = cell;
+        nextGrid[row][col] = cell; // cell lives
       }
 
       livingCells += nextGrid[row][col];
@@ -72,6 +74,7 @@ function setup() {
     }
   }
 
+  // Keep a reference of HTML elements
   genElement = document.getElementById('gen');
   livingElement = document.getElementById('living');
 }
@@ -86,9 +89,11 @@ function draw() {
     }
   }
 
-  // Compute next currentGrid state
-  computeNextGrid();
+  // Compute next generation and swap grids
+  computeNextGeneration();
   [currentGrid, nextGrid] = [nextGrid, currentGrid];
+
+  // Update HTML elements
   genElement.innerText = gen;
   livingElement.innerText = livingCells;
 }

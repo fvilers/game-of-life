@@ -1,0 +1,20 @@
+{
+  "name": "game-of-life",
+  "version": "0.0.0",
+  "description": "A simple implementation of Conway's Game of Life in JavaScript",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fvilers/game-of-life.git"
+  },
+  "keywords": [
+    "javascript",
+    "p5"
+  ],
+  "author": "Fabian Vilers <fabian.vilers@dev-one.com> (https://www.dev-one.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fvilers/game-of-life/issues"
+  },
+  "homepage": "https://github.com/fvilers/game-of-life#readme"
+}

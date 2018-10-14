@@ -81,7 +81,7 @@ function draw() {
   for (let row = 0; row < currentGrid.length; row++) {
     for (let col = 0; col < currentGrid[row].length; col++) {
       fill(!currentGrid[row][col] * 255);
-      stroke(128);
+      stroke(225);
       rect(col * SCALE, row * SCALE, SCALE, SCALE);
     }
   }

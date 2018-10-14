@@ -1,3 +1,7 @@
+const ROWS = 20;
+const COLS = 10;
+const SCALE = 10;
+
 let grid;
 
 function createGrid(rows, cols) {
@@ -7,7 +11,8 @@ function createGrid(rows, cols) {
 }
 
 function setup() {
-  grid = createGrid(10);
+  createCanvas(ROWS * SCALE, COLS * SCALE);
+  grid = createGrid(ROWS, COLS);
 }
 
 function draw() {}

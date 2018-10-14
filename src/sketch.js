@@ -3,6 +3,8 @@ const COLS = 100;
 const SCALE = 10;
 
 let grid;
+let gen = 0;
+let genElement;
 
 function createGrid(rows, cols) {
   return Array(rows)
@@ -43,6 +45,8 @@ function computeNextGrid(previous) {
     }
   }
 
+  gen++;
+
   return next;
 }
 
@@ -60,6 +64,8 @@ function setup() {
       grid[row][col] = floor(random(2));
     }
   }
+
+  genElement = document.getElementById('gen');
 }
 
 function draw() {
@@ -74,4 +80,5 @@ function draw() {
 
   // Compute next grid state
   grid = computeNextGrid(grid);
+  genElement.innerText = gen;
 }

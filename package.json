@@ -2,7 +2,9 @@
   "name": "game-of-life",
   "version": "0.0.0",
   "description": "A simple implementation of Conway's Game of Life in JavaScript",
-  "scripts": {},
+  "scripts": {
+    "start": "serve ./src"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fvilers/game-of-life.git"
@@ -16,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/fvilers/game-of-life/issues"
   },
-  "homepage": "https://github.com/fvilers/game-of-life#readme"
+  "homepage": "https://github.com/fvilers/game-of-life#readme",
+  "devDependencies": {
+    "serve": "10.0.2"
+  }
 }

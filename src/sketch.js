@@ -47,6 +47,9 @@ function computeNextGrid(previous) {
 }
 
 function setup() {
+  // Ensure animation is not too fast
+  frameRate(10);
+
   // Create the canvas (add 1 for the stroke line)
   createCanvas(COLS * SCALE + 1, ROWS * SCALE + 1);
 

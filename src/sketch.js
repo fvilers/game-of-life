@@ -1,5 +1,5 @@
-const ROWS = 50; // Number of grid rows
-const COLS = 100; // Number of grid columns
+const ROWS = 100; // Number of grid rows
+const COLS = 120; // Number of grid columns
 const SCALE = 10; // Grid scale (higher the bigger)
 
 let currentGrid;

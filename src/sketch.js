@@ -4,7 +4,9 @@ const SCALE = 10;
 
 let grid;
 let gen = 0;
+let livingCells = 0;
 let genElement;
+let livingElement;
 
 function createGrid(rows, cols) {
   return Array(rows)
@@ -28,6 +30,7 @@ function countNeighbors(array, x, y) {
 
 function computeNextGrid(previous) {
   const next = createGrid(ROWS, COLS);
+  livingCells = 0;
 
   // Determine next state for each cells
   for (let row = 0; row < previous.length; row++) {
@@ -42,6 +45,8 @@ function computeNextGrid(previous) {
       } else {
         next[row][col] = cell;
       }
+
+      livingCells += next[row][col];
     }
   }
 
@@ -61,11 +66,14 @@ function setup() {
   grid = createGrid(ROWS, COLS);
   for (let row = 0; row < grid.length; row++) {
     for (let col = 0; col < grid[row].length; col++) {
-      grid[row][col] = floor(random(2));
+      const cell = floor(random(2));
+      grid[row][col] = cell;
+      livingCells += cell;
     }
   }
 
   genElement = document.getElementById('gen');
+  livingElement = document.getElementById('living');
 }
 
 function draw() {
@@ -81,4 +89,5 @@ function draw() {
   // Compute next grid state
   grid = computeNextGrid(grid);
   genElement.innerText = gen;
+  livingElement.innerText = livingCells;
 }

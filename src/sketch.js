@@ -9,7 +9,7 @@ let genElement;
 function createGrid(rows, cols) {
   return Array(rows)
     .fill(0)
-    .map(x => Array(cols || rows).fill(0));
+    .map(() => Array(cols || rows).fill(0));
 }
 
 function countNeighbors(array, x, y) {

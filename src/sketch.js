@@ -2,7 +2,8 @@ const ROWS = 50;
 const COLS = 100;
 const SCALE = 10;
 
-let grid;
+let currentGrid;
+let nextGrid;
 let gen = 0;
 let livingCells = 0;
 let genElement;
@@ -28,31 +29,28 @@ function countNeighbors(array, x, y) {
   return neighbors;
 }
 
-function computeNextGrid(previous) {
-  const next = createGrid(ROWS, COLS);
+function computeNextGrid() {
   livingCells = 0;
 
   // Determine next state for each cells
-  for (let row = 0; row < previous.length; row++) {
-    for (let col = 0; col < previous[row].length; col++) {
-      const cell = previous[row][col];
-      const neighbors = countNeighbors(previous, col, row);
+  for (let row = 0; row < currentGrid.length; row++) {
+    for (let col = 0; col < currentGrid[row].length; col++) {
+      const cell = currentGrid[row][col];
+      const neighbors = countNeighbors(currentGrid, col, row);
 
       if (!cell && neighbors === 3) {
-        next[row][col] = 1;
+        nextGrid[row][col] = 1;
       } else if (cell && (neighbors < 2 || neighbors > 3)) {
-        next[row][col] = 0;
+        nextGrid[row][col] = 0;
       } else {
-        next[row][col] = cell;
+        nextGrid[row][col] = cell;
       }
 
-      livingCells += next[row][col];
+      livingCells += nextGrid[row][col];
     }
   }
 
   gen++;
-
-  return next;
 }
 
 function setup() {
@@ -62,12 +60,14 @@ function setup() {
   // Create the canvas (add 1 for the stroke line)
   createCanvas(COLS * SCALE + 1, ROWS * SCALE + 1);
 
-  // Create the grid and randomize content
-  grid = createGrid(ROWS, COLS);
-  for (let row = 0; row < grid.length; row++) {
-    for (let col = 0; col < grid[row].length; col++) {
+  // Create the grids and randomize content of the first one
+  currentGrid = createGrid(ROWS, COLS);
+  nextGrid = createGrid(ROWS, COLS);
+
+  for (let row = 0; row < currentGrid.length; row++) {
+    for (let col = 0; col < currentGrid[row].length; col++) {
       const cell = floor(random(2));
-      grid[row][col] = cell;
+      currentGrid[row][col] = cell;
       livingCells += cell;
     }
   }
@@ -78,16 +78,17 @@ function setup() {
 
 function draw() {
   // Draw each cell: black for living cells, white for dead ones
-  for (let row = 0; row < grid.length; row++) {
-    for (let col = 0; col < grid[row].length; col++) {
-      fill(!grid[row][col] * 255);
+  for (let row = 0; row < currentGrid.length; row++) {
+    for (let col = 0; col < currentGrid[row].length; col++) {
+      fill(!currentGrid[row][col] * 255);
       stroke(128);
       rect(col * SCALE, row * SCALE, SCALE, SCALE);
     }
   }
 
-  // Compute next grid state
-  grid = computeNextGrid(grid);
+  // Compute next currentGrid state
+  computeNextGrid();
+  [currentGrid, nextGrid] = [nextGrid, currentGrid];
   genElement.innerText = gen;
   livingElement.innerText = livingCells;
 }

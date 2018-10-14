@@ -12,7 +12,13 @@ function createGrid(rows, cols) {
 
 function setup() {
   createCanvas(ROWS * SCALE, COLS * SCALE);
+
   grid = createGrid(ROWS, COLS);
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      grid[i][j] = floor(random(2));
+    }
+  }
 }
 
 function draw() {}

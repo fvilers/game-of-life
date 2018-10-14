@@ -1,4 +1,4 @@
-const ROWS = 20;
+const ROWS = 5;
 const COLS = 10;
 const SCALE = 10;
 
@@ -11,8 +11,10 @@ function createGrid(rows, cols) {
 }
 
 function setup() {
-  createCanvas(ROWS * SCALE, COLS * SCALE);
+  // Create the canvas (add 1 for the stroke line)
+  createCanvas(COLS * SCALE + 1, ROWS * SCALE + 1);
 
+  // Create the grid and randomize content
   grid = createGrid(ROWS, COLS);
   for (let i = 0; i < grid.length; i++) {
     for (let j = 0; j < grid[i].length; j++) {
@@ -21,4 +23,13 @@ function setup() {
   }
 }
 
-function draw() {}
+function draw() {
+  // Draw each cell: black for living cells, white for dead ones
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[i].length; j++) {
+      fill(!grid[i][j] * 255);
+      stroke(128);
+      rect(j * SCALE, i * SCALE, SCALE, SCALE);
+    }
+  }
+}
